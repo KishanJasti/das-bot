@@ -18,7 +18,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<docker.image.prefix>kjasti</docker.image.prefix>
+		<docker.image.prefix>kishanjasti</docker.image.prefix>
 	</properties>
 
 	<dependencies>
@@ -60,10 +60,9 @@
 			<plugin>
 				<groupId>com.spotify</groupId>
 				<artifactId>docker-maven-plugin</artifactId>
-				<version>0.4.11</version>
 				<configuration>
 					<imageName>${docker.image.prefix}/${project.artifactId}</imageName>
-					<dockerDirectory>src/main/docker</dockerDirectory>
+					<dockerDirectory>${project.basedir}</dockerDirectory>
 					<resources>
 						<resource>
 							<targetPath>/</targetPath>
@@ -72,6 +71,20 @@
 						</resource>
 					</resources>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>com.boot.App</mainClass>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
